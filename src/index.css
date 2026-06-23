@@ -1,0 +1,855 @@
+@import "tailwindcss";
+
+:root {
+  --gold: #e8b020;
+  --gold-light: #f0d060;
+  --gold-dark: #b8860b;
+  --blood: #8b1a1a;
+  --blood-dark: #5a0e0e;
+  --blood-deeper: #3a0808;
+  --parchment: #f5e6c8;
+  --parchment-dark: #d4c4a0;
+  --stone: #0d0a08;
+  --stone-mid: #1a1410;
+  --stone-light: #2a2018;
+  --bronze: #cd7f32;
+  --ink: #2c1810;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--stone);
+  color: var(--parchment);
+  font-family: 'Old Standard TT', serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--stone-mid); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--blood), var(--blood-dark)); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #a02020, var(--blood)); }
+
+.font-cinzel { font-family: 'Cormorant SC', 'Cormorant Garamond', serif; }
+.font-cinzel-dec { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+.font-fell { font-family: 'Old Standard TT', serif; }
+
+.text-gold { color: var(--gold); }
+.text-gold-light { color: var(--gold-light); }
+.text-blood { color: var(--blood); }
+.text-parchment { color: var(--parchment); }
+.text-parchment-dark { color: var(--parchment-dark); }
+.text-bronze { color: var(--bronze); }
+
+.bg-stone { background-color: var(--stone); }
+.bg-stone-mid { background-color: var(--stone-mid); }
+.bg-stone-light { background-color: var(--stone-light); }
+.bg-blood { background-color: var(--blood); }
+.bg-blood-dark { background-color: var(--blood-dark); }
+.bg-gold { background-color: var(--gold); }
+.bg-parchment { background-color: var(--parchment); }
+
+.border-gold { border-color: var(--gold); }
+.border-gold-dark { border-color: var(--gold-dark); }
+.border-blood { border-color: var(--blood); }
+.border-stone-light { border-color: var(--stone-light); }
+
+.stone-texture {
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(139,26,26,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(139,26,26,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(42,32,24,0.9) 0%, transparent 70%),
+    linear-gradient(180deg, #0d0a08 0%, #1a1410 50%, #0d0a08 100%);
+}
+
+/* Тяжёлая римская рамка */
+.roman-border-heavy {
+  border: 3px solid var(--blood);
+  box-shadow: 
+    inset 0 0 30px rgba(139,26,26,0.15),
+    inset 0 0 60px rgba(0,0,0,0.3),
+    0 0 20px rgba(0,0,0,0.6),
+    0 0 2px var(--gold-dark);
+  position: relative;
+  background: linear-gradient(135deg, rgba(26,20,16,0.95) 0%, rgba(13,10,8,0.98) 100%);
+}
+
+.roman-border-heavy::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(232,176,32,0.15);
+  pointer-events: none;
+}
+
+.roman-border {
+  border: 2px solid rgba(139,26,26,0.6);
+  box-shadow: 
+    inset 0 0 20px rgba(0,0,0,0.2),
+    0 0 10px rgba(0,0,0,0.4);
+  background: linear-gradient(135deg, rgba(26,20,16,0.9) 0%, rgba(13,10,8,0.95) 100%);
+}
+
+/* Основная кнопка - красная */
+.roman-btn-primary {
+  font-family: 'Cormorant SC', 'Cormorant Garamond', serif;
+  background: linear-gradient(180deg, var(--blood) 0%, var(--blood-dark) 50%, var(--blood-deeper) 100%);
+  color: var(--gold);
+  border: 2px solid var(--gold-dark);
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.roman-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(232,176,32,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.roman-btn-primary:hover::before {
+  left: 100%;
+}
+
+.roman-btn-primary:hover {
+  background: linear-gradient(180deg, #a52020 0%, var(--blood) 50%, var(--blood-dark) 100%);
+  border-color: var(--gold);
+  box-shadow: 0 0 25px rgba(139,26,26,0.5), 0 0 10px rgba(232,176,32,0.2);
+  transform: translateY(-1px);
+}
+
+.roman-btn-primary:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: 0 0 15px rgba(139,26,26,0.4);
+}
+
+/* Вторичная кнопка */
+.roman-btn {
+  font-family: 'Cormorant SC', 'Cormorant Garamond', serif;
+  background: linear-gradient(180deg, var(--stone-light) 0%, var(--stone-mid) 50%, var(--stone) 100%);
+  color: var(--gold);
+  border: 2px solid var(--blood-dark);
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.roman-btn:hover {
+  background: linear-gradient(180deg, var(--stone-mid) 0%, var(--stone) 100%);
+  border-color: var(--blood);
+  box-shadow: 0 0 15px rgba(139,26,26,0.3);
+}
+
+.roman-btn:active {
+  transform: scale(0.97);
+}
+
+/* Маленькая кнопка */
+.roman-btn-sm {
+  font-family: 'Cormorant SC', 'Cormorant Garamond', serif;
+  background: linear-gradient(180deg, var(--blood-dark) 0%, var(--blood-deeper) 100%);
+  color: var(--gold);
+  border: 1px solid var(--gold-dark);
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.roman-btn-sm:hover {
+  background: var(--blood);
+  box-shadow: 0 0 10px rgba(139,26,26,0.4);
+}
+
+/* Кнопка завершения задачи */
+.roman-btn-complete {
+  font-family: 'Cormorant SC', 'Cormorant Garamond', serif;
+  background: linear-gradient(180deg, #27ae60 0%, #1e8449 50%, #145a32 100%);
+  color: var(--gold);
+  border: 2px solid var(--gold-dark);
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  width: 100%;
+}
+
+.roman-btn-complete:hover {
+  background: linear-gradient(180deg, #2ecc71 0%, #27ae60 50%, #1e8449 100%);
+  box-shadow: 0 0 25px rgba(39,174,96,0.4), 0 0 10px rgba(232,176,32,0.2);
+  transform: translateY(-2px);
+}
+
+.roman-btn-complete:active {
+  transform: scale(0.98);
+}
+
+/* Анимации */
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 8px rgba(232,176,32,0.4); }
+  50% { box-shadow: 0 0 25px rgba(232,176,32,0.7); }
+}
+
+@keyframes pulse-blood {
+  0%, 100% { box-shadow: 0 0 8px rgba(139,26,26,0.4); }
+  50% { box-shadow: 0 0 25px rgba(139,26,26,0.7); }
+}
+
+.pulse-gold { animation: pulse-gold 2.5s infinite; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeIn 0.5s ease forwards; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up { animation: slideUp 0.6s ease forwards; }
+
+@keyframes levelUp {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.level-up-anim { animation: levelUp 0.8s ease forwards; }
+
+@keyframes checkPulse {
+  0% { box-shadow: 0 0 0 rgba(139,26,26,0); }
+  50% { box-shadow: 0 0 20px rgba(232,176,32,0.6); }
+  100% { box-shadow: 0 0 5px rgba(139,26,26,0.4); }
+}
+
+/* Тосты */
+@keyframes toastIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes toastOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(120%); opacity: 0; }
+}
+
+.toast {
+  padding: 14px 20px;
+  min-width: 220px;
+  border: 2px solid var(--gold-dark);
+  background: linear-gradient(135deg, var(--stone-mid) 0%, var(--stone) 100%);
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+.toast.toast-in { animation: toastIn 0.4s ease forwards; }
+.toast.toast-out { animation: toastOut 0.4s ease forwards; }
+
+.toast.xp { 
+  border-color: var(--gold); 
+  background: linear-gradient(135deg, rgba(58,48,8,0.95) 0%, var(--stone) 100%);
+  color: var(--gold);
+}
+
+.toast.levelup { 
+  border-color: var(--gold); 
+  background: linear-gradient(135deg, var(--blood-dark) 0%, var(--blood-deeper) 100%);
+  color: var(--gold);
+  box-shadow: 0 0 30px rgba(232,176,32,0.4);
+  font-weight: bold;
+}
+
+.toast.negative { 
+  border-color: #c0392b;
+  color: #e74c3c;
+}
+
+.toast.error {
+  border-color: #c0392b;
+  background: linear-gradient(135deg, rgba(90,14,14,0.9) 0%, var(--stone) 100%);
+  color: #e74c3c;
+}
+
+.toast.info {
+  color: var(--parchment);
+}
+
+/* Инпуты */
+.roman-input {
+  background: rgba(13,10,8,0.9);
+  border: 2px solid var(--blood-dark);
+  color: var(--parchment);
+  padding: 10px 14px;
+  font-family: 'Old Standard TT', serif;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.roman-input:focus {
+  border-color: var(--gold-dark);
+  box-shadow: 0 0 15px rgba(232,176,32,0.15), inset 0 0 10px rgba(139,26,26,0.1);
+}
+
+.roman-input::placeholder {
+  color: rgba(245,230,200,0.3);
+  font-style: italic;
+}
+
+/* Селекты */
+.roman-select {
+  background: rgba(13,10,8,0.9);
+  border: 2px solid var(--blood-dark);
+  color: var(--parchment);
+  padding: 8px 12px;
+  font-family: 'Old Standard TT', serif;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b1a1a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 32px;
+}
+
+.roman-select:focus {
+  border-color: var(--gold-dark);
+}
+
+/* Атрибут селект - текстовый (русские сокращения) */
+.attr-select-text {
+  background: rgba(13,10,8,0.9);
+  border: 2px solid var(--blood-dark);
+  min-width: 50px;
+  height: 28px;
+  padding: 2px 4px;
+  font-family: 'Cormorant SC', 'Cormorant Garamond', serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+
+.attr-select-text:focus {
+  border-color: var(--gold-dark);
+}
+
+/* Вкладки */
+.tab-btn-new {
+  font-family: 'Cormorant SC', 'Cormorant Garamond', serif;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--parchment-dark);
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.tab-btn-new:hover {
+  color: var(--gold);
+  background: rgba(139,26,26,0.15);
+}
+
+.tab-btn-new.active {
+  color: var(--gold);
+  background: linear-gradient(180deg, rgba(139,26,26,0.3) 0%, transparent 100%);
+  border-bottom: 3px solid var(--gold);
+}
+
+/* Статистика карточки */
+.stat-card {
+  background: linear-gradient(135deg, rgba(26,20,16,0.9) 0%, rgba(13,10,8,0.95) 100%);
+  border: 2px solid var(--blood-dark);
+  padding: 16px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.stat-card:hover {
+  border-color: var(--blood);
+  box-shadow: 0 0 15px rgba(139,26,26,0.3);
+}
+
+/* Таблица календаря */
+.calendar-table {
+  border-collapse: separate;
+  border-spacing: 2px;
+  width: 100%;
+}
+
+.calendar-table th {
+  font-family: 'Cormorant SC', 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  padding: 8px 4px;
+  text-align: center;
+  color: var(--gold);
+  background: linear-gradient(180deg, var(--blood-dark) 0%, var(--blood-deeper) 100%);
+  border: 1px solid rgba(232,176,32,0.2);
+}
+
+.calendar-table th.weekend-header {
+  color: #ff6b6b !important;
+  background: linear-gradient(180deg, #6a1010 0%, #4a0808 100%);
+}
+
+.calendar-table td {
+  text-align: center;
+  padding: 3px;
+  border: 1px solid rgba(139,26,26,0.2);
+  background: var(--stone);
+  min-width: 32px;
+  height: 32px;
+}
+
+.calendar-table .task-name-cell {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: var(--stone-mid);
+  border-right: 3px solid var(--blood);
+}
+
+.today-col {
+  box-shadow: inset 0 0 0 2px var(--gold);
+  background: rgba(139,26,26,0.2) !important;
+}
+
+/* Ячейка отметки */
+.check-cell {
+  width: 26px;
+  height: 26px;
+  margin: auto;
+  cursor: pointer;
+  border: 2px solid rgba(139,26,26,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  background: rgba(13,10,8,0.8);
+}
+
+.check-cell:hover:not(.disabled) {
+  border-color: var(--gold);
+  background: rgba(232,176,32,0.1);
+  transform: scale(1.1);
+}
+
+.check-cell.checked {
+  background: linear-gradient(135deg, var(--blood) 0%, var(--blood-dark) 100%);
+  border-color: var(--gold);
+  animation: checkPulse 0.5s ease;
+}
+
+.check-cell.checked::after {
+  content: '✓';
+  color: var(--gold);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.check-cell.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.check-cell.disabled:hover {
+  transform: none;
+  border-color: rgba(139,26,26,0.4);
+  background: rgba(13,10,8,0.8);
+}
+
+/* Кнопка удаления */
+.delete-btn {
+  color: var(--blood);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px 8px;
+  transition: all 0.2s;
+  opacity: 0.6;
+}
+
+.delete-btn:hover {
+  color: #e74c3c;
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Прогресс бар */
+.progress-bar-container {
+  width: 100%;
+  height: 10px;
+  background: var(--stone);
+  border: 1px solid var(--blood-dark);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blood-dark), var(--blood), var(--gold-dark));
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px rgba(232,176,32,0.3);
+}
+
+/* Аватар */
+.avatar-ring {
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 15px rgba(232,176,32,0.4), 0 0 30px rgba(139,26,26,0.3);
+  animation: pulse-gold 3s infinite;
+}
+
+/* Красивые звёзды для сложности */
+.difficulty-star {
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.difficulty-star:hover {
+  transform: scale(1.15);
+}
+
+/* Звёзды в карточках задач */
+.task-star {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+}
+
+.task-star svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* RPG карточка */
+.rpg-task-card {
+  background: linear-gradient(135deg, var(--stone-mid) 0%, var(--stone) 100%);
+  border: 2px solid var(--blood-dark);
+  border-left: 5px solid var(--blood);
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: all 0.3s;
+}
+
+.rpg-task-card:hover {
+  border-color: var(--blood);
+  box-shadow: 0 4px 20px rgba(139,26,26,0.3);
+  transform: translateX(3px);
+}
+
+.rpg-task-card.completed {
+  opacity: 0.5;
+  border-left-color: #27ae60;
+}
+
+/* Этапы задачи */
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  background: rgba(13,10,8,0.6);
+  border: 1px solid rgba(139,26,26,0.3);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.step-item:hover:not(.disabled) {
+  background: rgba(139,26,26,0.1);
+  border-color: var(--blood);
+}
+
+.step-item.done {
+  background: rgba(39,174,96,0.1);
+  border-color: rgba(39,174,96,0.3);
+}
+
+.step-checkbox {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--blood-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--gold);
+  background: var(--stone);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.step-item.done .step-checkbox {
+  background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+  border-color: var(--gold-dark);
+}
+
+.step-text {
+  font-size: 1rem;
+  color: var(--parchment);
+  flex: 1;
+}
+
+.step-item.done .step-text {
+  text-decoration: line-through;
+  color: #6a5a40;
+}
+
+/* Модальное окно */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content-large {
+  background: linear-gradient(135deg, var(--stone-mid) 0%, var(--stone) 100%);
+  border: 3px solid var(--blood);
+  box-shadow: 0 0 50px rgba(139,26,26,0.4), 0 0 100px rgba(0,0,0,0.8);
+  padding: 36px;
+  max-width: 550px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.4s ease;
+}
+
+/* Дневник запись */
+.journal-entry {
+  background: linear-gradient(135deg, rgba(26,20,16,0.9) 0%, rgba(13,10,8,0.95) 100%);
+  border-left: 4px solid var(--blood);
+  border-right: 1px solid rgba(139,26,26,0.3);
+  border-top: 1px solid rgba(139,26,26,0.3);
+  border-bottom: 1px solid rgba(139,26,26,0.3);
+  padding: 18px;
+  margin-bottom: 14px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.journal-entry:hover {
+  border-left-color: var(--gold);
+  box-shadow: 0 2px 15px rgba(139,26,26,0.2);
+  transform: translateX(3px);
+}
+
+.journal-textarea {
+  background: rgba(13,10,8,0.8);
+  border: 2px solid var(--blood-dark);
+  color: var(--parchment);
+  font-family: 'Old Standard TT', serif;
+  font-size: 1rem;
+  padding: 14px;
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.journal-textarea:focus {
+  border-color: var(--gold-dark);
+  box-shadow: 0 0 15px rgba(232,176,32,0.1);
+}
+
+/* Настроение кнопки */
+.mood-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px;
+  border: 2px solid var(--blood-dark);
+  background: var(--stone);
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 52px;
+  flex: 1;
+}
+
+.mood-btn:hover {
+  border-color: var(--blood);
+  background: rgba(139,26,26,0.15);
+}
+
+.mood-btn.active {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, rgba(139,26,26,0.3) 0%, rgba(232,176,32,0.1) 100%);
+  box-shadow: 0 0 15px rgba(232,176,32,0.2);
+}
+
+.mood-icon {
+  font-size: 1.1rem;
+  color: var(--gold);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.mood-label {
+  font-size: 0.6rem;
+  font-family: 'Cormorant SC', 'Cormorant Garamond', serif;
+  color: #8a7540;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1;
+}
+
+/* Финансы */
+.finance-entry {
+  background: linear-gradient(135deg, rgba(26,20,16,0.9) 0%, rgba(13,10,8,0.95) 100%);
+  border: 1px solid rgba(139,26,26,0.3);
+  border-left: 4px solid var(--blood);
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+
+.finance-entry:hover {
+  border-left-color: var(--gold);
+}
+
+.finance-positive { color: #4ade80; }
+.finance-negative { color: #f87171; }
+
+/* Идеи */
+.idea-card {
+  background: linear-gradient(135deg, rgba(26,20,16,0.9) 0%, rgba(13,10,8,0.95) 100%);
+  border: 2px solid var(--blood-dark);
+  border-left: 5px solid var(--gold-dark);
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.idea-card:hover {
+  border-color: var(--blood);
+  box-shadow: 0 4px 20px rgba(139,26,26,0.2);
+  transform: translateX(3px);
+}
+
+/* Распорядок дня */
+.routine-item {
+  background: linear-gradient(135deg, rgba(26,20,16,0.9) 0%, rgba(13,10,8,0.95) 100%);
+  border: 1px solid rgba(139,26,26,0.3);
+  border-left: 4px solid var(--bronze);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  transition: all 0.2s;
+}
+
+.routine-item:hover {
+  border-left-color: var(--gold);
+}
+
+.day-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--blood-dark);
+  background: var(--stone);
+  color: #6a5a40;
+  font-size: 0.65rem;
+  font-family: 'Cormorant SC', serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.day-chip.active {
+  background: linear-gradient(135deg, var(--blood) 0%, var(--blood-dark) 100%);
+  border-color: var(--gold-dark);
+  color: var(--gold);
+}
+
+.day-chip:hover {
+  border-color: var(--gold);
+}
+
+/* Нижняя навигация - непрозрачная */
+.bottom-nav {
+  position: sticky;
+  bottom: 0;
+  background: var(--stone);
+  border-top: 2px solid var(--blood);
+  z-index: 50;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .calendar-table th {
+    font-size: 0.65rem;
+    padding: 6px 2px;
+  }
+  
+  .calendar-table td {
+    min-width: 26px;
+    height: 26px;
+  }
+  
+  .check-cell {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .calendar-table .task-name-cell {
+    max-width: 140px;
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+  
+  .mood-btn {
+    padding: 8px 10px;
+    min-width: 50px;
+  }
+  
+  .mood-icon {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .roman-btn-primary, .roman-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}
